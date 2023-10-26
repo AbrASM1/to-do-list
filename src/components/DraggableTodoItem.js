@@ -1,5 +1,10 @@
 import React from 'react';
+import { useDrag } from 'react-dnd';
 import styled from 'styled-components';
+
+const ItemTypes = {
+  TODO: 'todo',
+};
 
 const TodoItemContainer = styled.div`
   display: flex;
@@ -10,12 +15,14 @@ const TodoItemContainer = styled.div`
   background-color: ${props => {
     if (props.priority === 'important') return '#ffeb3b';
     if (props.priority === 'critical') return '#ff4081';
-    return '#ddd'; // Default color for normal priority
+    return '#788995';
   }};
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   overflow: hidden;
   opacity: ${props => props.completed ? '0.5' : '1'};
+  cursor: move;
+  border: 2px solid transparent;
 `;
 
 const Checkbox = styled.label`
@@ -90,9 +97,18 @@ const Deadline = styled.div`
   margin-top: 8px;
 `;
 
-function TodoItem({ todo, onToggle, onDelete }) {
+function DraggableTodoItem({ todo, onToggle, onDelete, index, moveTodo }) {
+  const [, ref] = useDrag({
+    type: ItemTypes.TODO,
+    item: { index, id: todo.id },
+  });
+
   return (
-    <TodoItemContainer completed={todo.completed} priority={todo.priority}>
+    <TodoItemContainer
+      completed={todo.completed}
+      priority={todo.priority}
+      ref={ref}
+    >
       <Checkbox>
         <input
           type="checkbox"
@@ -106,11 +122,11 @@ function TodoItem({ todo, onToggle, onDelete }) {
           {todo.text}
         </TodoText>
         <Description>{todo.description}</Description>
-        <Deadline>Deadline: {todo.deadline}</Deadline>
+        {todo.deadline && <Deadline>Deadline: {todo.deadline}</Deadline>}
       </div>
       <DeleteButton onClick={() => onDelete(todo.id)}>Delete</DeleteButton>
     </TodoItemContainer>
   );
 }
 
-export default TodoItem;
+export default DraggableTodoItem;

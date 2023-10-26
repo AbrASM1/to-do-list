@@ -2,3 +2,7 @@
 .completed {
   text-decoration: line-through;
 }
+body.dark-theme {
+  background-color: #333;
+  color: white;
+}
