@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react';
-
+// j'ai ajouter le dark mode pour und meileure lisébilité du text , wahhab
 const ThemeSwitcher = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleTheme = () => {
     setIsDarkMode(prevMode => !prevMode);
 
-    document.body.classList.toggle('dark-theme');//A CHANGER BACKGROUND
+    document.body.classList.toggle('dark-theme');
   };
 
   return (

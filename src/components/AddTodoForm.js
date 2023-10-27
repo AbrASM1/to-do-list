@@ -70,12 +70,12 @@ function AddTodoForm({ onAddTodo }) {
     e.preventDefault();
     if (inputText.trim() !== '') {
       onAddTodo({
-        id: new Date().getTime(), // Generate a unique ID (timestamp)
+        id: new Date().getTime(), // Generation de unique id 
         text: inputText,
         description,
         deadline,
         priority,
-        completed: false, // Assuming a default value for completed
+        completed: false, 
       });
       setInputText('');
       setDescription('');

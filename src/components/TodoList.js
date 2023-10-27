@@ -1,5 +1,5 @@
 import React from 'react';
-import DraggableTodoItem from './DraggableTodoItem';
+import TodoItem from './TodoItem';
 import styled from 'styled-components';
 
 import { useDrop } from 'react-dnd';
@@ -20,7 +20,7 @@ function TodoList({ todos, onToggle, onDelete, moveTodo }) {
   return (
     <TodoListContainer ref={ref}>
       {todos.map((todo, index) => (
-        <DraggableTodoItem
+        <TodoItem
           key={todo.id}
           todo={todo}
           onToggle={onToggle}
